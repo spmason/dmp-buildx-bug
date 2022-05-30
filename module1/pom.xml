@@ -23,21 +23,34 @@
       <plugin>
         <groupId>io.fabric8</groupId>
         <artifactId>docker-maven-plugin</artifactId>
+        <version>0.40.0</version>
         <configuration>
-          <skip>${skipDockerBuild}</skip>
           <images>
             <image>
-              <name>${image}</name>
+              <name>dmp-buildx-bug</name>
               <build>
                 <dockerFile>${project.basedir}/Dockerfile</dockerFile>
                 <assembly>
                   <name>maven</name>
                   <targetDir>/</targetDir>
                   <mode>dir</mode>
+                  <inline>
+                    <dependencySets>
+                      <dependencySet>
+                        <includes>
+                          <include>${project.groupId}:${project.artifactId}</include>
+                        </includes>
+                        <outputDirectory>.</outputDirectory>
+                      </dependencySet>
+                    </dependencySets>
+                  </inline>
                 </assembly>
-                <args>
-                  <FROM>${docker.from}</FROM>
-                </args>
+                <buildx>
+                  <platforms>
+                    <platform>linux/amd64</platform>
+                    <platform>linux/arm64</platform>
+                  </platforms>
+                </buildx>
               </build>
             </image>
           </images>

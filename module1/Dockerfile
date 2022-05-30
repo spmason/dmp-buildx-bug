@@ -1,7 +1,5 @@
 # syntax = docker/dockerfile:1.0-experimental
-ARG FROM
-# hadolint ignore=DL3006
-FROM ${FROM}
+FROM azul/zulu-openjdk-alpine:11
 
 SHELL ["/bin/ash", "-eo", "pipefail", "-c"]
 

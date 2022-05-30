@@ -16,50 +16,6 @@
   <properties>
     <maven.compiler.source>11</maven.compiler.source>
     <maven.compiler.target>11</maven.compiler.target>
-
-    <imageRegistry>myregistry</imageRegistry>
-    <imageApp>${project.artifactId}</imageApp>
-    <imageTag>${project.version}</imageTag>
-    <image>${imageRegistry}/${imageApp}:${imageTag}</image>
-
-    <docker.from>azul/zulu-openjdk-alpine:11</docker.from>
   </properties>
 
-  <build>
-    <pluginManagement>
-      <plugins>
-        <plugin>
-          <groupId>io.fabric8</groupId>
-          <artifactId>docker-maven-plugin</artifactId>
-          <version>0.40.0</version>
-          <configuration>
-            <skip>true</skip>
-            <images>
-              <image>
-                <name>${image}</name>
-                <build>
-                  <compression>gzip</compression>
-                  <buildx>
-                    <platforms>
-                      <platform>linux/amd64</platform>
-                      <platform>linux/arm64</platform>
-                    </platforms>
-                  </buildx>
-                </build>
-              </image>
-            </images>
-          </configuration>
-          <executions>
-            <execution>
-              <id>default</id>
-              <goals>
-                <goal>build</goal>
-              </goals>
-              <phase>package</phase>
-            </execution>
-          </executions>
-        </plugin>
-      </plugins>
-    </pluginManagement>
-  </build>
 </project>
